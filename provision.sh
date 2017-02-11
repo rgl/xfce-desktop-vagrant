@@ -35,13 +35,15 @@ apt-get install -y virtualbox-5.1
 
 # install Packer.
 apt-get install -y unzip
-wget -q -O/tmp/packer_0.10.2_linux_amd64.zip https://releases.hashicorp.com/packer/0.10.2/packer_0.10.2_linux_amd64.zip
-unzip /tmp/packer_0.10.2_linux_amd64.zip -d /usr/local/bin
+packer_version=0.12.2
+wget -q -O/tmp/packer_${packer_version}_linux_amd64.zip https://releases.hashicorp.com/packer/${packer_version}/packer_${packer_version}_linux_amd64.zip
+unzip /tmp/packer_${packer_version}_linux_amd64.zip -d /usr/local/bin
 
 # install Vagrant.
-wget -q -O/tmp/vagrant_1.8.6_x86_64.deb https://releases.hashicorp.com/vagrant/1.8.6/vagrant_1.8.6_x86_64.deb
-dpkg -i /tmp/vagrant_1.8.6_x86_64.deb
-rm /tmp/vagrant_1.8.6_x86_64.deb
+vagrant_version=1.9.1
+wget -q -O/tmp/vagrant_${vagrant_version}_x86_64.deb https://releases.hashicorp.com/vagrant/${vagrant_version}/vagrant_${vagrant_version}_x86_64.deb
+dpkg -i /tmp/vagrant_${vagrant_version}_x86_64.deb
+rm /tmp/vagrant_${vagrant_version}_x86_64.deb
 
 # set system configuration.
 cp -v -r /vagrant/config/etc/* /etc
