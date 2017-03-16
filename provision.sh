@@ -33,6 +33,9 @@ echo 'deb http://download.virtualbox.org/virtualbox/debian xenial contrib' >/etc
 apt-get update
 apt-get install -y virtualbox-5.1
 
+# install libvirt et al.
+apt-get install -y virt-manager
+
 # install Packer.
 apt-get install -y unzip
 packer_version=0.12.2
@@ -44,6 +47,15 @@ vagrant_version=1.9.1
 wget -q -O/tmp/vagrant_${vagrant_version}_x86_64.deb https://releases.hashicorp.com/vagrant/${vagrant_version}/vagrant_${vagrant_version}_x86_64.deb
 dpkg -i /tmp/vagrant_${vagrant_version}_x86_64.deb
 rm /tmp/vagrant_${vagrant_version}_x86_64.deb
+# install useful vagrant plugins.
+apt-get install -y libvirt-dev
+su vagrant -c bash <<'VAGRANT_EOF'
+#!/bin/bash
+set -eux
+vagrant plugin install vagrant-reload
+vagrant plugin install vagrant-triggers
+vagrant plugin install vagrant-libvirt
+VAGRANT_EOF
 
 # set system configuration.
 cp -v -r /vagrant/config/etc/* /etc
