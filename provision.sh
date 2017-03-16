@@ -21,6 +21,7 @@ apt-get install -y --no-install-recommends httpie
 apt-get install -y --no-install-recommends vim
 
 # install Visual Studio Code.
+apt-get install -y apt-transport-https # NB because VSC installs an https repo.
 wget -q -O/tmp/vscode_amd64.deb 'https://go.microsoft.com/fwlink/?LinkID=760868'
 dpkg -i /tmp/vscode_amd64.deb
 rm /tmp/vscode_amd64.deb
@@ -38,12 +39,12 @@ apt-get install -y virt-manager
 
 # install Packer.
 apt-get install -y unzip
-packer_version=0.12.2
+packer_version=0.12.3
 wget -q -O/tmp/packer_${packer_version}_linux_amd64.zip https://releases.hashicorp.com/packer/${packer_version}/packer_${packer_version}_linux_amd64.zip
 unzip /tmp/packer_${packer_version}_linux_amd64.zip -d /usr/local/bin
 
 # install Vagrant.
-vagrant_version=1.9.1
+vagrant_version=1.9.2
 wget -q -O/tmp/vagrant_${vagrant_version}_x86_64.deb https://releases.hashicorp.com/vagrant/${vagrant_version}/vagrant_${vagrant_version}_x86_64.deb
 dpkg -i /tmp/vagrant_${vagrant_version}_x86_64.deb
 rm /tmp/vagrant_${vagrant_version}_x86_64.deb
