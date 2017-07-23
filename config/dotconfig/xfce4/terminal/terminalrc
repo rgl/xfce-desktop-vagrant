@@ -1,5 +1,6 @@
 [Configuration]
 ColorForeground=#17f018
+CommandLoginShell=TRUE
 MiscAlwaysShowTabs=FALSE
 MiscBell=FALSE
 MiscBordersDefault=TRUE
