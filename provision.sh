@@ -15,7 +15,6 @@ apt-get install -y xfce4-whiskermenu-plugin
 apt-get install -y xfce4-taskmanager
 apt-get install -y menulibre
 apt-get install -y firefox
-apt-get install -y qemu-utils
 apt-get install -y git-core meld
 apt-get install -y --no-install-recommends httpie
 apt-get install -y --no-install-recommends vim
@@ -25,38 +24,7 @@ apt-get install -y apt-transport-https # NB because VSC installs an https repo.
 wget -q -O/tmp/vscode_amd64.deb 'https://go.microsoft.com/fwlink/?LinkID=760868'
 dpkg -i /tmp/vscode_amd64.deb
 rm /tmp/vscode_amd64.deb
-
-# install VirtualBox.
-# see https://www.virtualbox.org/wiki/Linux_Downloads
-wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | apt-key add -
-wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | apt-key add -
-echo 'deb http://download.virtualbox.org/virtualbox/debian xenial contrib' >/etc/apt/sources.list.d/virtualbox.list
 apt-get update
-apt-get install -y virtualbox-5.1
-
-# install libvirt et al.
-apt-get install -y virt-manager
-
-# install Packer.
-apt-get install -y unzip
-packer_version=0.12.3
-wget -q -O/tmp/packer_${packer_version}_linux_amd64.zip https://releases.hashicorp.com/packer/${packer_version}/packer_${packer_version}_linux_amd64.zip
-unzip /tmp/packer_${packer_version}_linux_amd64.zip -d /usr/local/bin
-
-# install Vagrant.
-vagrant_version=1.9.2
-wget -q -O/tmp/vagrant_${vagrant_version}_x86_64.deb https://releases.hashicorp.com/vagrant/${vagrant_version}/vagrant_${vagrant_version}_x86_64.deb
-dpkg -i /tmp/vagrant_${vagrant_version}_x86_64.deb
-rm /tmp/vagrant_${vagrant_version}_x86_64.deb
-# install useful vagrant plugins.
-apt-get install -y libvirt-dev
-su vagrant -c bash <<'VAGRANT_EOF'
-#!/bin/bash
-set -eux
-vagrant plugin install vagrant-reload
-vagrant plugin install vagrant-triggers
-vagrant plugin install vagrant-libvirt
-VAGRANT_EOF
 
 # set system configuration.
 cp -v -r /vagrant/config/etc/* /etc

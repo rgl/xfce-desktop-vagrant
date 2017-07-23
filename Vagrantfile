@@ -29,4 +29,5 @@ Vagrant.configure(2) do |config|
   config.vm.provision :reload
   config.vm.provision 'shell', path: 'provision-guest-additions.sh'
   config.vm.provision :reload
+  config.vm.provision 'shell', path: 'provision-virtualization-tools.sh'
 end
