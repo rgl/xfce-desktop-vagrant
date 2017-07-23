@@ -20,13 +20,14 @@ apt-get install -y --no-install-recommends httpie
 apt-get install -y --no-install-recommends vim
 
 # install Visual Studio Code.
-apt-get install -y apt-transport-https # NB because VSC installs an https repo.
-wget -q -O/tmp/vscode_amd64.deb 'https://go.microsoft.com/fwlink/?LinkID=760868'
-dpkg -i /tmp/vscode_amd64.deb
-rm /tmp/vscode_amd64.deb
+apt-get install -y apt-transport-https # NB because VSC is installed from an https repo.
+wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | apt-key add -
+echo 'deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main' >/etc/apt/sources.list.d/vscode.list
 apt-get update
+apt-get install -y code
 
 # set system configuration.
+rm -f /{root,home/*}/.{profile,bashrc}
 cp -v -r /vagrant/config/etc/* /etc
 
 su vagrant -c bash <<'VAGRANT_EOF'
