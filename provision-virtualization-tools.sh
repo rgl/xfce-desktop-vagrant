@@ -16,24 +16,24 @@ wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | apt-key a
 wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | apt-key add -
 echo "deb http://download.virtualbox.org/virtualbox/debian $(lsb_release -sc) contrib" >/etc/apt/sources.list.d/virtualbox.list
 apt-get update
-apt-get install -y virtualbox-5.1
+apt-get install -y virtualbox-5.2
 
 # install libvirt et al.
 apt-get install -y virt-manager
 
 # install Packer.
 apt-get install -y unzip
-packer_version=1.0.3
+packer_version=1.1.3
 wget -q -O/tmp/packer_${packer_version}_linux_amd64.zip https://releases.hashicorp.com/packer/${packer_version}/packer_${packer_version}_linux_amd64.zip
 unzip /tmp/packer_${packer_version}_linux_amd64.zip -d /usr/local/bin
 # install useful packer plugins.
-wget -q -O/tmp/packer-provisioner-windows-update-linux.tgz https://github.com/rgl/packer-provisioner-windows-update/releases/download/v0.3.0/packer-provisioner-windows-update-linux.tgz
+wget -q -O/tmp/packer-provisioner-windows-update-linux.tgz https://github.com/rgl/packer-provisioner-windows-update/releases/download/v0.4.0/packer-provisioner-windows-update-linux.tgz
 tar xf /tmp/packer-provisioner-windows-update-linux.tgz -C /usr/local/bin
 chmod +x /usr/local/bin/packer-provisioner-windows-update
 rm /tmp/packer-provisioner-windows-update-linux.tgz
 
 # install Vagrant.
-vagrant_version=1.9.7
+vagrant_version=2.0.1
 wget -q -O/tmp/vagrant_${vagrant_version}_x86_64.deb https://releases.hashicorp.com/vagrant/${vagrant_version}/vagrant_${vagrant_version}_x86_64.deb
 dpkg -i /tmp/vagrant_${vagrant_version}_x86_64.deb
 rm /tmp/vagrant_${vagrant_version}_x86_64.deb
