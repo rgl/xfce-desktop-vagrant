@@ -1,14 +1,15 @@
 Vagrant.configure(2) do |config|
-  config.vm.box = 'ubuntu-16.04-amd64'
+  config.vm.box = 'ubuntu-18.04-amd64'
 
   config.vm.hostname = 'xfce-desktop'
 
-  config.vm.provider "libvirt" do |lv|
+  config.vm.provider "libvirt" do |lv, config|
     lv.memory = 4096
     lv.cpus = 4
     lv.cpu_mode = "host-passthrough"
     lv.nested = true
     lv.keymap = "pt"
+    config.vm.synced_folder '.', '/vagrant', type: 'nfs'
   end
 
   config.vm.provider 'virtualbox' do |vb|
