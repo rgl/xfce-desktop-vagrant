@@ -9,8 +9,7 @@ export DEBIAN_FRONTEND=noninteractive
 
 apt-get update
 
-apt-get install -y xfce4 lightdm lightdm-gtk-greeter
-apt-get install -y xfce4-terminal
+apt-get install -y xfce4 xfce4-terminal lightdm lightdm-gtk-greeter
 apt-get install -y xfce4-whiskermenu-plugin
 apt-get install -y xfce4-taskmanager
 apt-get install -y menulibre
