@@ -20,6 +20,9 @@ apt-get install -y virtualbox-6.0
 
 # install libvirt et al.
 apt-get install -y virt-manager
+# let the vagrant user manage libvirtd.
+# see /usr/share/polkit-1/rules.d/60-libvirt.rules
+usermod -aG libvirt vagrant
 
 # install Packer.
 apt-get install -y unzip
