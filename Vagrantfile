@@ -32,4 +32,5 @@ Vagrant.configure(2) do |config|
   config.vm.provision :reload
   config.vm.provision 'shell', path: 'provision-virtualization-tools.sh'
   config.vm.provision 'shell', path: 'provision-monodevelop.sh'
+  config.vm.provision :reload
 end
