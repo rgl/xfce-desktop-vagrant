@@ -1,7 +1,7 @@
 Vagrant.configure(2) do |config|
-  config.vm.box = 'ubuntu-18.10-amd64'
+  config.vm.box = 'ubuntu-19.10-amd64'
 
-  config.vm.hostname = 'xfce-desktop'
+  config.vm.hostname = 'desktop'
 
   config.vm.provider "libvirt" do |lv, config|
     lv.memory = 4096
@@ -31,6 +31,6 @@ Vagrant.configure(2) do |config|
   config.vm.provision 'shell', path: 'provision-guest-additions.sh'
   config.vm.provision :reload
   config.vm.provision 'shell', path: 'provision-virtualization-tools.sh'
-  config.vm.provision 'shell', path: 'provision-monodevelop.sh'
+  #config.vm.provision 'shell', path: 'provision-monodevelop.sh' # NB this is not working in Ubuntu 19.10.
   config.vm.provision :reload
 end

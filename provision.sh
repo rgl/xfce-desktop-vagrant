@@ -9,11 +9,12 @@ export DEBIAN_FRONTEND=noninteractive
 
 apt-get update
 
-apt-get install -y xfce4 xfce4-terminal lightdm lightdm-gtk-greeter
-apt-get install -y xfce4-whiskermenu-plugin
-apt-get install -y xfce4-taskmanager
-apt-get install -y menulibre
-apt-get install -y firefox
+# install the desktop.
+apt-get install -y ubuntu-desktop-minimal
+#apt-get install -y xrdp
+#apt-get install -y chromium-browser
+
+# install useful tools.
 apt-get install -y git-core meld
 apt-get install -y --no-install-recommends httpie
 apt-get install -y --no-install-recommends vim
@@ -33,12 +34,6 @@ su vagrant -c bash <<'VAGRANT_EOF'
 #!/bin/bash
 # abort this script on errors.
 set -eux
-
-# set user configuration.
-mkdir -p .config
-cp -r /vagrant/config/dotconfig/* .config
-find .config -type d -exec chmod 700 {} \;
-find .config -type f -exec chmod 600 {} \;
 
 # configure git.
 # see http://stackoverflow.com/a/12492094/477532

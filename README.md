@@ -1,4 +1,4 @@
-Install the [Ubuntu 18.10 Base Box](https://github.com/rgl/ubuntu-vagrant).
+Install the [Ubuntu 19.10 Base Box](https://github.com/rgl/ubuntu-vagrant).
 
 Run `vagrant up --provider=libvirt` to launch with libvirt (qemu-kvm).
 
