@@ -7,6 +7,10 @@ set -eux
 #     dpkg-preconfigure: unable to re-open stdin: No such file or directory
 export DEBIAN_FRONTEND=noninteractive
 
+# install iso creation tool.
+# NB xorriso is compatible with genisoimage and mkisofs and is also available in msys2 (windows).
+apt-get install -y xorriso
+
 # install qemu tools.
 apt-get install -y qemu-utils
 
