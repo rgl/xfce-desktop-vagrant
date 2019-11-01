@@ -30,11 +30,11 @@ usermod -aG libvirt vagrant
 
 # install Packer.
 apt-get install -y unzip
-packer_version=1.2.5
+packer_version=1.4.4
 wget -q -O/tmp/packer_${packer_version}_linux_amd64.zip https://releases.hashicorp.com/packer/${packer_version}/packer_${packer_version}_linux_amd64.zip
 unzip /tmp/packer_${packer_version}_linux_amd64.zip -d /usr/local/bin
 # install useful packer plugins.
-wget -q -O/tmp/packer-provisioner-windows-update-linux.tgz https://github.com/rgl/packer-provisioner-windows-update/releases/download/v0.6.1/packer-provisioner-windows-update-linux.tgz
+wget -q -O/tmp/packer-provisioner-windows-update-linux.tgz https://github.com/rgl/packer-provisioner-windows-update/releases/download/v0.7.1/packer-provisioner-windows-update-linux.tgz
 tar xf /tmp/packer-provisioner-windows-update-linux.tgz -C /usr/local/bin
 chmod +x /usr/local/bin/packer-provisioner-windows-update
 rm /tmp/packer-provisioner-windows-update-linux.tgz
