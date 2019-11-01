@@ -40,7 +40,7 @@ chmod +x /usr/local/bin/packer-provisioner-windows-update
 rm /tmp/packer-provisioner-windows-update-linux.tgz
 
 # install Vagrant.
-vagrant_version=2.2.3
+vagrant_version=2.2.6
 wget -q -O/tmp/vagrant_${vagrant_version}_x86_64.deb https://releases.hashicorp.com/vagrant/${vagrant_version}/vagrant_${vagrant_version}_x86_64.deb
 dpkg -i /tmp/vagrant_${vagrant_version}_x86_64.deb
 rm /tmp/vagrant_${vagrant_version}_x86_64.deb
@@ -49,7 +49,9 @@ apt-get install -y libvirt-dev
 su vagrant -c bash <<'VAGRANT_EOF'
 #!/bin/bash
 set -eux
+cd ~
 vagrant plugin install vagrant-reload
-vagrant plugin install vagrant-libvirt
+CONFIGURE_ARGS='with-libvirt-include=/usr/include/libvirt with-libvirt-lib=/usr/lib' \
+    vagrant plugin install vagrant-libvirt
 vagrant plugin install vagrant-windows-update
 VAGRANT_EOF
