@@ -11,6 +11,10 @@ export DEBIAN_FRONTEND=noninteractive
 # NB xorriso is compatible with genisoimage and mkisofs and is also available in msys2 (windows).
 apt-get install -y xorriso
 
+# install the iso-info tool.
+# NB iso-info is also available in msys2 (windows) as provided by the mingw-w64-x86_64-libcdio package.
+apt-get install -y libcdio-utils
+
 # install qemu tools.
 apt-get install -y qemu-utils
 
