@@ -59,3 +59,15 @@ CONFIGURE_ARGS='with-libvirt-include=/usr/include/libvirt with-libvirt-lib=/usr/
     vagrant plugin install vagrant-libvirt
 vagrant plugin install vagrant-windows-update
 VAGRANT_EOF
+# add support for smb shared folders.
+# see https://github.com/hashicorp/vagrant/pull/9948
+pushd /opt/vagrant/embedded/gems/$vagrant_version/gems/vagrant-$vagrant_version
+wget -q https://github.com/hashicorp/vagrant/commit/ed7139fa1e896d0b84ed32180b72a647bf9f37eb.patch
+patch -p1 <ed7139fa1e896d0b84ed32180b72a647bf9f37eb.patch
+rm ed7139fa1e896d0b84ed32180b72a647bf9f37eb.patch
+popd
+apt-get install -y samba smbclient
+smbpasswd -a -s vagrant <<'EOF'
+vagrant
+vagrant
+EOF
