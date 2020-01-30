@@ -24,7 +24,7 @@ wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | apt-key a
 wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | apt-key add -
 echo "deb http://download.virtualbox.org/virtualbox/debian $(lsb_release -sc) contrib" >/etc/apt/sources.list.d/virtualbox.list
 apt-get update
-apt-get install -y virtualbox-6.0
+apt-get install -y virtualbox-6.1
 
 # install libvirt et al.
 apt-get install -y virt-manager
