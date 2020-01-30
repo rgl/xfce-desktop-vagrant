@@ -44,7 +44,7 @@ chmod +x /usr/local/bin/packer-provisioner-windows-update
 rm /tmp/packer-provisioner-windows-update-linux.tgz
 
 # install Vagrant.
-vagrant_version=2.2.6
+vagrant_version=2.2.7
 wget -q -O/tmp/vagrant_${vagrant_version}_x86_64.deb https://releases.hashicorp.com/vagrant/${vagrant_version}/vagrant_${vagrant_version}_x86_64.deb
 dpkg -i /tmp/vagrant_${vagrant_version}_x86_64.deb
 rm /tmp/vagrant_${vagrant_version}_x86_64.deb
