@@ -24,6 +24,27 @@ wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | apt-key add -
 echo 'deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main' >/etc/apt/sources.list.d/vscode.list
 apt-get update
 apt-get install -y code
+# install extensions.
+su vagrant -c bash <<'VAGRANT_EOF'
+#!/bin/bash
+set -eux
+code_extensions=(
+    'hookyqr.beautify'
+    'dotjoshjohnson.xml'
+    'docsmsft.docs-authoring-pack'
+    'ms-vscode-remote.remote-ssh'
+    'ms-vscode.powershell'
+    'ms-vscode.csharp'
+    'ms-vscode.go'
+    'ms-python.python'
+    'mauve.terraform'
+    'ms-azuretools.vscode-docker'
+    'zamerick.vscode-caddyfile-syntax'
+)
+for name in ${code_extensions[@]}; do
+    code --install-extension $name
+done
+VAGRANT_EOF
 
 # set system configuration.
 rm -f /{root,home/*}/.{profile,bashrc}
