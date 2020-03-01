@@ -18,6 +18,12 @@ apt-get install -y libcdio-utils
 # install qemu tools.
 apt-get install -y qemu-utils
 
+# install jq.
+apt-get install -y jq
+
+# install unzip.
+apt-get install -y unzip
+
 # install VirtualBox.
 # see https://www.virtualbox.org/wiki/Linux_Downloads
 wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | apt-key add -
@@ -28,9 +34,36 @@ apt-get install -y virtualbox-6.1
 
 # install libvirt et al.
 apt-get install -y virt-manager
+# configure the security_driver to prevent errors alike (when using terraform):
+#   Could not open '/var/lib/libvirt/images/terraform_example_root.img': Permission denied'
+sed -i -E 's,#?(security_driver)\s*=.*,\1 = "none",g' /etc/libvirt/qemu.conf
+systemctl restart libvirtd
 # let the vagrant user manage libvirtd.
 # see /usr/share/polkit-1/rules.d/60-libvirt.rules
 usermod -aG libvirt vagrant
+
+# install terraform.
+terraform_version=0.12.21
+terraform_url="https://releases.hashicorp.com/terraform/$terraform_version/terraform_${terraform_version}_linux_amd64.zip"
+terraform_filename="$(basename $terraform_url)"
+wget -q $terraform_url
+unzip $terraform_filename
+install terraform /usr/local/bin
+rm terraform $terraform_filename
+# install the libvirt provider.
+terraform_libvirt_provider_url='https://github.com/dmacvicar/terraform-provider-libvirt/releases/download/v0.6.1/terraform-provider-libvirt-0.6.1+git.1578064534.db13b678.Ubuntu_18.04.amd64.tar.gz'
+terraform_libvirt_provider_filename="/tmp/$(basename $terraform_libvirt_provider_url)"
+wget -qO$terraform_libvirt_provider_filename $terraform_libvirt_provider_url
+su vagrant -c bash <<VAGRANT_EOF
+#!/bin/bash
+set -euxo pipefail
+cd ~
+tar xf $terraform_libvirt_provider_filename
+install -d ~/.terraform.d/plugins/linux_amd64
+install terraform-provider-libvirt ~/.terraform.d/plugins/linux_amd64/
+rm terraform-provider-libvirt
+VAGRANT_EOF
+rm $terraform_libvirt_provider_filename
 
 # install Packer.
 apt-get install -y unzip
