@@ -34,7 +34,7 @@ code_extensions=(
     'docsmsft.docs-authoring-pack'
     'ms-vscode-remote.remote-ssh'
     'ms-vscode.powershell'
-    'ms-vscode.csharp'
+    'ms-dotnettools.csharp'
     'ms-vscode.go'
     'ms-python.python'
     'mauve.terraform'
