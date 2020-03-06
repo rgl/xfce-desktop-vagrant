@@ -43,7 +43,7 @@ systemctl restart libvirtd
 usermod -aG libvirt vagrant
 
 # install terraform.
-terraform_version=0.12.21
+terraform_version=0.12.23
 terraform_url="https://releases.hashicorp.com/terraform/$terraform_version/terraform_${terraform_version}_linux_amd64.zip"
 terraform_filename="$(basename $terraform_url)"
 wget -q $terraform_url
