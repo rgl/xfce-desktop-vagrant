@@ -24,10 +24,10 @@ wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | apt-key add -
 echo 'deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main' >/etc/apt/sources.list.d/vscode.list
 apt-get update
 apt-get install -y code
-# install extensions.
 su vagrant -c bash <<'VAGRANT_EOF'
 #!/bin/bash
 set -eux
+# install extensions.
 code_extensions=(
     'hookyqr.beautify'
     'dotjoshjohnson.xml'
@@ -44,6 +44,15 @@ code_extensions=(
 for name in ${code_extensions[@]}; do
     code --install-extension $name
 done
+# configure the settings.
+install -d ~/.config/Code/User
+cat >~/.config/Code/User/settings.json <<'EOF'
+{
+    "files.associations": {
+        "Vagrantfile": "ruby"
+    }
+}
+EOF
 VAGRANT_EOF
 
 # set system configuration.
