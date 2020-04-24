@@ -67,7 +67,7 @@ rm $terraform_libvirt_provider_filename
 
 # install Packer.
 apt-get install -y unzip
-packer_version=1.5.4
+packer_version=1.5.5
 wget -q -O/tmp/packer_${packer_version}_linux_amd64.zip https://releases.hashicorp.com/packer/${packer_version}/packer_${packer_version}_linux_amd64.zip
 unzip /tmp/packer_${packer_version}_linux_amd64.zip -d /usr/local/bin
 # install useful packer plugins.
