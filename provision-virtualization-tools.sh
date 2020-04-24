@@ -51,7 +51,7 @@ unzip $terraform_filename
 install terraform /usr/local/bin
 rm terraform $terraform_filename
 # install the libvirt provider.
-terraform_libvirt_provider_url='https://github.com/dmacvicar/terraform-provider-libvirt/releases/download/v0.6.1/terraform-provider-libvirt-0.6.1+git.1578064534.db13b678.Ubuntu_18.04.amd64.tar.gz'
+terraform_libvirt_provider_url='https://github.com/dmacvicar/terraform-provider-libvirt/releases/download/v0.6.2/terraform-provider-libvirt-0.6.2+git.1585292411.8cbe9ad0.Ubuntu_18.04.amd64.tar.gz'
 terraform_libvirt_provider_filename="/tmp/$(basename $terraform_libvirt_provider_url)"
 wget -qO$terraform_libvirt_provider_filename $terraform_libvirt_provider_url
 su vagrant -c bash <<VAGRANT_EOF
