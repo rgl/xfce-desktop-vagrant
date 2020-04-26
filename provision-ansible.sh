@@ -1,18 +1,20 @@
 #!/bin/bash
 set -eux
 
-# install ansible from ppa.
-# NB use apt-cache madison ansible to known the available versions.
-#    at the time of writting this installed ansible 2.9.0-1ppa~bionic.
-# NB this uses python2. python3 is not yet provided as a ppa
-#    (there's an open issue at https://github.com/ansible/ansible/issues/57342).
-# see https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#latest-releases-via-apt-ubuntu
-apt-get install -y software-properties-common
-apt-add-repository --yes --update ppa:ansible/ansible
-apt-get install -y ansible
+ansible_version='2.9.7'         # see https://pypi.org/project/ansible/
+ansible_lint_version='4.2.0'    # see https://pypi.org/project/ansible-lint/
+
+# install ansible into the /opt/ansible venv.
+# see https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-ansible-with-pip
+apt-get install -y --no-install-recommends python3-pip python3-venv
+python3 -m venv /opt/ansible
+source /opt/ansible/bin/activate
+# NB this pip install will display several "error: invalid command 'bdist_wheel'"
+#    messages, those can be ignored.
+python3 -m pip install ansible==$ansible_version ansible-lint==$ansible_lint_version
 ansible --version
 ansible -m ping localhost
 
 # install the ansible shell completion helpers.
-apt-get install -y python-argcomplete
-activate-global-python-argcomplete
+apt-get install -y python3-argcomplete
+activate-global-python-argcomplete3
