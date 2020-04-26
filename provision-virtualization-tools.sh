@@ -74,7 +74,7 @@ wget -q -O/tmp/vagrant_${vagrant_version}_x86_64.deb https://releases.hashicorp.
 dpkg -i /tmp/vagrant_${vagrant_version}_x86_64.deb
 rm /tmp/vagrant_${vagrant_version}_x86_64.deb
 # install useful vagrant plugins.
-apt-get install -y libvirt-dev
+apt-get install -y libvirt-dev gcc make
 su vagrant -c bash <<'VAGRANT_EOF'
 #!/bin/bash
 set -eux

@@ -9,17 +9,28 @@ export DEBIAN_FRONTEND=noninteractive
 
 apt-get update
 
-apt-get install -y xfce4 xfce4-terminal lightdm lightdm-gtk-greeter
-apt-get install -y xfce4-whiskermenu-plugin
-apt-get install -y xfce4-taskmanager
-apt-get install -y menulibre
-apt-get install -y firefox
-apt-get install -y git-core meld
+# install the desktop.
+apt-get install -y --no-install-recommends \
+    xorg \
+    xserver-xorg-video-qxl \
+    xserver-xorg-video-fbdev \
+    xserver-xorg-video-vmware \
+    xfce4 \
+    xfce4-terminal \
+    lightdm \
+    lightdm-gtk-greeter \
+    xfce4-whiskermenu-plugin \
+    xfce4-taskmanager \
+    menulibre \
+    firefox
+
+# install useful tools.
+apt-get install -y --no-install-recommends git-core meld
 apt-get install -y --no-install-recommends httpie
 apt-get install -y --no-install-recommends vim
 
 # install Visual Studio Code.
-apt-get install -y apt-transport-https # NB because VSC is installed from an https repo.
+apt-get install -y --no-install-recommends gnupg apt-transport-https # NB because VSC is installed from an https repo.
 wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | apt-key add -
 echo 'deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main' >/etc/apt/sources.list.d/vscode.list
 apt-get update
