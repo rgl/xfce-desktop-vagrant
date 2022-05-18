@@ -30,6 +30,9 @@ apt-get install -y virt-manager
 #   Could not open '/var/lib/libvirt/images/terraform_example_root.img': Permission denied'
 sed -i -E 's,#?(security_driver)\s*=.*,\1 = "none",g' /etc/libvirt/qemu.conf
 systemctl restart libvirtd
+adduser --quiet --disabled-password --gecos "vagrant" vagrant
+# set password
+echo "vagrant:vagrant" | chpasswd
 # let the vagrant user manage libvirtd.
 # see /usr/share/polkit-1/rules.d/60-libvirt.rules
 usermod -aG libvirt vagrant
@@ -59,9 +62,9 @@ rm $terraform_libvirt_provider_filename
 
 # install Packer.
 apt-get install -y unzip
-packer_version=1.5.5
+packer_version=1.6.6
 wget -q -O/tmp/packer_${packer_version}_linux_amd64.zip https://releases.hashicorp.com/packer/${packer_version}/packer_${packer_version}_linux_amd64.zip
-unzip /tmp/packer_${packer_version}_linux_amd64.zip -d /usr/local/bin
+yes | unzip /tmp/packer_${packer_version}_linux_amd64.zip -d /usr/local/bin
 # install useful packer plugins.
 wget -q -O/tmp/packer-provisioner-windows-update-linux.tgz https://github.com/rgl/packer-provisioner-windows-update/releases/download/v0.9.0/packer-provisioner-windows-update-linux.tgz
 tar xf /tmp/packer-provisioner-windows-update-linux.tgz -C /usr/local/bin
@@ -69,7 +72,7 @@ chmod +x /usr/local/bin/packer-provisioner-windows-update
 rm /tmp/packer-provisioner-windows-update-linux.tgz
 
 # install Vagrant.
-vagrant_version=2.2.7
+vagrant_version=2.2.19
 wget -q -O/tmp/vagrant_${vagrant_version}_x86_64.deb https://releases.hashicorp.com/vagrant/${vagrant_version}/vagrant_${vagrant_version}_x86_64.deb
 dpkg -i /tmp/vagrant_${vagrant_version}_x86_64.deb
 rm /tmp/vagrant_${vagrant_version}_x86_64.deb
